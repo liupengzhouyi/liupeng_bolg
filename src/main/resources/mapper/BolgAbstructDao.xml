@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liupeng.liupeng_bolg.dao.BolgAbstructDao">
+
+    <resultMap type="com.liupeng.liupeng_bolg.entity.BolgAbstruct" id="BolgAbstructMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="blogName" column="blog_name" jdbcType="VARCHAR"/>
+        <result property="blogType1" column="blog_type_1" jdbcType="INTEGER"/>
+        <result property="blogType2" column="blog_type_2" jdbcType="INTEGER"/>
+        <result property="blogType3" column="blog_type_3" jdbcType="INTEGER"/>
+        <result property="blogType4" column="blog_type_4" jdbcType="INTEGER"/>
+        <result property="blogType5" column="blog_type_5" jdbcType="INTEGER"/>
+        <result property="addDate" column="add_date" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+        <result property="delDate" column="del_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BolgAbstructMap">
+        select id,
+               blog_name,
+               blog_type_1,
+               blog_type_2,
+               blog_type_3,
+               blog_type_4,
+               blog_type_5,
+               add_date,
+               is_delete,
+               del_date
+        from blog.bolg_abstruct
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BolgAbstructMap">
+        select id,
+               blog_name,
+               blog_type_1,
+               blog_type_2,
+               blog_type_3,
+               blog_type_4,
+               blog_type_5,
+               add_date,
+               is_delete,
+               del_date
+        from blog.bolg_abstruct limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BolgAbstructMap">
+        select id,
+               blog_name,
+               blog_type_1,
+               blog_type_2,
+               blog_type_3,
+               blog_type_4,
+               blog_type_5,
+               add_date,
+               is_delete,
+               del_date
+        from blog.bolg_abstruct
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.bolg_abstruct(blog_name, blog_type_1, blog_type_2, blog_type_3, blog_type_4, blog_type_5,
+                                       add_date, is_delete, del_date)
+        values (#{blogName}, #{blogType1}, #{blogType2}, #{blogType3}, #{blogType4}, #{blogType5}, #{addDate},
+                #{isDelete}, #{delDate})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.bolg_abstruct(blog_name, blog_type_1, blog_type_2, blog_type_3, blog_type_4, blog_type_5,
+        add_date, is_delete, del_date)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.blogName}, #{entity.blogType1}, #{entity.blogType2}, #{entity.blogType3}, #{entity.blogType4},
+            #{entity.blogType5}, #{entity.addDate}, #{entity.isDelete}, #{entity.delDate})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.bolg_abstruct(blog_name, blog_type_1, blog_type_2, blog_type_3, blog_type_4, blog_type_5,
+        add_date, is_delete, del_date)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.blogName}, #{entity.blogType1}, #{entity.blogType2}, #{entity.blogType3}, #{entity.blogType4},
+            #{entity.blogType5}, #{entity.addDate}, #{entity.isDelete}, #{entity.delDate})
+        </foreach>
+        on duplicate key update
+        blog_name = values(blog_name) , blog_type_1 = values(blog_type_1) , blog_type_2 = values(blog_type_2) ,
+        blog_type_3 = values(blog_type_3) , blog_type_4 = values(blog_type_4) , blog_type_5 = values(blog_type_5) ,
+        add_date = values(add_date) , is_delete = values(is_delete) , del_date = values(del_date)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update blog.bolg_abstruct
+        <set>
+            <if test="blogName != null and blogName != ''">
+                blog_name = #{blogName},
+            </if>
+            <if test="blogType1 != null">
+                blog_type_1 = #{blogType1},
+            </if>
+            <if test="blogType2 != null">
+                blog_type_2 = #{blogType2},
+            </if>
+            <if test="blogType3 != null">
+                blog_type_3 = #{blogType3},
+            </if>
+            <if test="blogType4 != null">
+                blog_type_4 = #{blogType4},
+            </if>
+            <if test="blogType5 != null">
+                blog_type_5 = #{blogType5},
+            </if>
+            <if test="addDate != null">
+                add_date = #{addDate},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="delDate != null">
+                del_date = #{delDate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from blog.bolg_abstruct
+        where id = #{id}
+    </delete>
+
+</mapper>
