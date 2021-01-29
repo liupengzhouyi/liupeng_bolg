@@ -9,7 +9,6 @@ create table blog_types
 )
     comment '博客类型';
 
-
 create table bolg_abstruct
 (
     id          int auto_increment comment '自增ID',
@@ -26,3 +25,14 @@ create table bolg_abstruct
         primary key (id)
 )
     comment '博客概要');
+
+create table blog_information
+(
+    id int auto_increment comment '自增ID',
+    blog_id int not null comment '博客ID',
+    constraint blog_information_pk
+        primary key (id)
+)
+    comment '博客内容';
+
+
