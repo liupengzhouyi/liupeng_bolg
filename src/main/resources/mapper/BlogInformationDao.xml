@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liupeng.liupeng_bolg.dao.BlogInformationDao">
+
+    <resultMap type="com.liupeng.liupeng_bolg.entity.BlogInformation" id="BlogInformationMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="blogId" column="blog_id" jdbcType="INTEGER"/>
+        <result property="information" column="information" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BlogInformationMap">
+        select id,
+               blog_id,
+               information
+        from blog.blog_information
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BlogInformationMap">
+        select id,
+               blog_id,
+               information
+        from blog.blog_information limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BlogInformationMap">
+        select id,
+               blog_id,
+               information
+        from blog.blog_information
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.blog_information(blog_id, information)
+        values (#{blogId}, #{information})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.blog_information(blog_id, information)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.blogId}, #{entity.information})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into blog.blog_information(blog_id, information)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.blogId}, #{entity.information})
+        </foreach>
+        on duplicate key update
+        blog_id = values(blog_id) , information = values(information)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update blog.blog_information
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId},
+            </if>
+            <if test="information != null and information != ''">
+                information = #{information},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from blog.blog_information
+        where id = #{id}
+    </delete>
+
+</mapper>
