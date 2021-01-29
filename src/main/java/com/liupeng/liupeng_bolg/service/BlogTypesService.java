@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * 博客类型(BlogTypes)表服务接口
  *
- * @author makejava
- * @since 2021-01-29 18:33:05
+ * @author liupeng
+ * @since 2021-01-29 19:17:39
  */
 public interface BlogTypesService {
 
@@ -28,6 +28,13 @@ public interface BlogTypesService {
      * @return 对象列表
      */
     List<BlogTypes> queryAllByLimit(int offset, int limit);
+
+    /**
+     * 查询所有数据
+     *
+     * @return 对象列表
+     */
+    List<BlogTypes> queryAll();
 
     /**
      * 新增数据

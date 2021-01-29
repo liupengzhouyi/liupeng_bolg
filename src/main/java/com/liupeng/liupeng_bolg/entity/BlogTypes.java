@@ -6,11 +6,11 @@ import java.util.Date;
 /**
  * 博客类型(BlogTypes)实体类
  *
- * @author makejava
- * @since 2021-01-29 18:32:58
+ * @author liupeng
+ * @since 2021-01-29 19:17:36
  */
 public class BlogTypes implements Serializable {
-    private static final long serialVersionUID = 407518786650646462L;
+    private static final long serialVersionUID = -73776304772898885L;
     /**
      * 自增ID
      */

@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * 博客类型(BlogTypes)表服务实现类
  *
- * @author makejava
- * @since 2021-01-29 18:33:08
+ * @author liupeng
+ * @since 2021-01-29 19:19:03
  */
 @Service("blogTypesService")
 public class BlogTypesServiceImpl implements BlogTypesService {
@@ -41,6 +41,17 @@ public class BlogTypesServiceImpl implements BlogTypesService {
     public List<BlogTypes> queryAllByLimit(int offset, int limit) {
         return this.blogTypesDao.queryAllByLimit(offset, limit);
     }
+
+    /**
+     * 查询所有数据
+     *
+     * @return 对象列表
+     */
+    @Override
+    public List<BlogTypes> queryAll() {
+        return this.blogTypesDao.queryAll();
+    }
+
 
     /**
      * 新增数据

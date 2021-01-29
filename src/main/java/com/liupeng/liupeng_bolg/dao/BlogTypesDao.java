@@ -1,18 +1,16 @@
 package com.liupeng.liupeng_bolg.dao;
 
 import com.liupeng.liupeng_bolg.entity.BlogTypes;
-
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
-
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
  * 博客类型(BlogTypes)表数据库访问层
  *
- * @author makejava
- * @since 2021-01-29 18:33:00
+ * @author liupeng
+ * @since 2021-01-29 19:17:38
  */
 @Mapper
 public interface BlogTypesDao {
@@ -36,12 +34,11 @@ public interface BlogTypesDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * 通过所有
      *
-     * @param blogTypes 实例对象
      * @return 对象列表
      */
-    List<BlogTypes> queryAll(BlogTypes blogTypes);
+    List<BlogTypes> queryAll();
 
     /**
      * 新增数据
