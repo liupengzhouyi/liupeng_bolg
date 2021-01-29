@@ -17,7 +17,7 @@ import java.util.List;
  * @author liupeng
  * @since 2021-01-29 19:49:28
  */
-@Api(tags = {"管理"})
+@Api(tags = {"博客类型管理"})
 @RestController
 @RequestMapping("blogTypes")
 public class BlogTypesController {
